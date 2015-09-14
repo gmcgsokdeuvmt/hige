@@ -99,7 +99,7 @@ def top_page():
     user = get_user()
 
     cur = get_db().cursor()
-    cur.execute('SELECT count(*) AS c FROM memos WHERE is_private=0')
+    cur.execute('SELECT count(id) AS c FROM memos WHERE is_private=0')
     total = cur.fetchone()['c']
 
     cur.execute("SELECT * FROM memos WHERE is_private=0 ORDER BY created_at DESC, id DESC LIMIT 100")
@@ -123,7 +123,7 @@ def recent(page):
     user = get_user()
 
     cur = get_db().cursor()
-    cur.execute('SELECT count(*) AS c FROM memos WHERE is_private=0')
+    cur.execute('SELECT count(id) AS c FROM memos WHERE is_private=0')
     total = cur.fetchone()['c']
 
     cur.execute("SELECT * FROM memos WHERE is_private=0 ORDER BY created_at DESC, id DESC LIMIT 100 OFFSET " + str(page * 100))
